@@ -1,0 +1,16 @@
+name: Matrix Microservices IF
+
+on:
+  workflow_dispatch:
+
+jobs:
+  example_matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service-name: ['service-a', 'service-b', 'service-c']
+    steps:
+      - name: set up db connection
+        run: echo "connect to service-x instance"
+      - name: migration
+        run: echo "run migration"
