@@ -1,0 +1,40 @@
+name: Matrix Microservices Dynamic Config Complecated
+
+on:
+  workflow_dispatch
+
+jobs:
+  example_matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service-name: ['service-a', 'service-b', 'service-c']
+    env:
+      DB_INSTANCES_JSON: |
+        {
+          "service-a": {
+            "instance": "db-a:1111",
+            "pre-migration-job": true
+            "timeout-minutes": 30
+          },
+          "service-b": {
+            "instance": "db-b:2222",
+            "pre-migration-job": false
+            "timeout-minutes": 10
+          },
+          "service-c": {
+            "instance": "db-c:3333",
+            "pre-migration-job": false
+            "timeout-minutes": 10
+          }
+        }
+    steps:
+      - name: pre-migration-job
+        if: ${{ fromJson(env.DB_INSTANCES_JSON)[matrix.service-name][pre-migration-job] }}
+        run: echo "run pre-migration-job"
+      - name: migration
+        # set up timeout by microservice
+        timeout-minutes: ${{ fromJson(env.DB_INSTANCES_JSON)[matrix.service-name][timeout-minutes] }}
+        env: 
+          DB_INSTANCE: ${{ fromJson(env.DB_INSTANCES_JSON)[matrix.service-name] }}
+        run: echo "run migration --db-instance=$DB_INSTANCE"
