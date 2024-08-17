@@ -30,11 +30,11 @@ jobs:
         }
     steps:
       - name: pre-migration-job
-        if: ${{ fromJson(env.DB_INSTANCES_JSON)[matrix.service-name]["pre-migration-job"] }}
+        if: ${{ fromJson(env.DB_INSTANCES_JSON)[matrix.service-name]['pre-migration-job'] }}
         run: echo "run pre-migration-job"
       - name: migration
         # set up timeout by microservice
-        timeout-minutes: ${{ fromJson(env.DB_INSTANCES_JSON)[matrix.service-name]["timeout-minutes"] }}
+        timeout-minutes: ${{ fromJson(env.DB_INSTANCES_JSON)[matrix.service-name]['timeout-minutes'] }}
         env: 
-          DB_INSTANCE: ${{ fromJson(env.DB_INSTANCES_JSON)[matrix.service-name] }}
+          DB_INSTANCE: ${{ fromJson(env.DB_INSTANCES_JSON)[matrix.service-name]['instance'] }}
         run: echo "run migration --db-instance=$DB_INSTANCE"
