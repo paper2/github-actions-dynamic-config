@@ -12,12 +12,12 @@ jobs:
     steps:
       - name: set up db instance for service-a
         if: matrix.service-name == 'service-a'
-        run: echo "DB_INSTNCE=db-a:1111" >> $GITHUB_ENV
+        run: echo "DB_INSTANCE=db-a:1111" >> $GITHUB_ENV
       - name: set up db instance for service-b
         if: matrix.service-name == 'service-b'
-        run: echo "DB_INSTNCE=db-b:2222" >> $GITHUB_ENV
+        run: echo "DB_INSTANCE=db-b:2222" >> $GITHUB_ENV
       - name: set up db instance for service-c
         if: matrix.service-name == 'service-c'
-        run: echo "DB_INSTNCE=db-c:3333" >> $GITHUB_ENV
+        run: echo "DB_INSTANCE=db-c:3333" >> $GITHUB_ENV
       - name: migration
         run: echo "run migration --db-instance=$DB_INSTANCE"
