@@ -1,0 +1,54 @@
+name: String to Boolean
+
+on:
+  workflow_dispatch
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    env:
+     LOWERCASE_TRUE: true
+     LOWERCASE_FALSE: false
+     UPPERCASE_TRUE: TRUE
+     UPPERCASE_FALSE: FALSE
+     FIRST_LETTER_UPPERCASE_TRUE: True
+     FIRST_LETTER_UPPERCASE_FALSE: False
+    steps:
+      # fromJSON
+      - name: LOWERCASE_TRUE to Boolean by fromJSON
+        if: ${{ fromJSON(env.LOWERCASE_TRUE) }}
+        run: echo "LOWERCASE_TRUE is true"
+      - name: LOWERCASE_FALSE to Boolean by fromJSON
+        if: ${{ fromJSON(env.LOWERCASE_FALSE) }}
+        run: echo "LOWERCASE_FALSE is true"
+      - name: UPPERCASE_TRUE to Boolean by fromJSON
+        if: ${{ fromJSON(env.UPPERCASE_TRUE) }}
+        run: echo "UPPERCASE_TRUE is true"
+      - name: UPPERCASE_FALSE to Boolean by fromJSON
+        if: ${{ fromJSON(env.UPPERCASE_FALSE) }}
+        run: echo "UPPERCASE_FALSE is true"
+      - name: FIRST_LETTER_UPPERCASE_TRUE to Boolean by fromJSON  
+        if: ${{ fromJSON(env.FIRST_LETTER_UPPERCASE_TRUE) }}
+        run: echo "FIRST_LETTER_UPPERCASE_TRUE is true"
+      - name: FIRST_LETTER_UPPERCASE_FALSE to Boolean by fromJSON
+        if: ${{ fromJSON(env.FIRST_LETTER_UPPERCASE_FALSE) }}
+        run: echo "FIRST_LETTER_UPPERCASE_FALSE is true"
+      # startsWith
+      - name: LOWERCASE_TRUE to Boolean by startWith
+        if: ${{ startsWith(env.LOWERCASE_TRUE, 'true') }}
+        run: echo "LOWERCASE_TRUE is true"
+      - name: LOWERCASE_FALSE to Boolean by startWith
+        if: ${{ startsWith(env.LOWERCASE_FALSE, 'true') }}
+        run: echo "LOWERCASE_FALSE is true"
+      - name: UPPERCASE_TRUE to Boolean by startWith
+        if: ${{ startsWith(env.UPPERCASE_TRUE, 'true') }}
+        run: echo "UPPERCASE_TRUE is true"
+      - name: UPPERCASE_FALSE to Boolean by startWith
+        if: ${{ startsWith(env.UPPERCASE_FALSE, 'true') }}
+        run: echo "UPPERCASE_FALSE is true"
+      - name: FIRST_LETTER_UPPERCASE_TRUE to Boolean by startWith
+        if: ${{ startsWith(env.FIRST_LETTER_UPPERCASE_TRUE, 'true') }}
+        run: echo "FIRST_LETTER_UPPERCASE_TRUE is true"
+      - name: FIRST_LETTER_UPPERCASE_FALSE to Boolean by startWith
+        if: ${{ startsWith(env.FIRST_LETTER_UPPERCASE_FALSE, 'true') }}
+        run: echo "FIRST_LETTER_UPPERCASE_FALSE is true"
