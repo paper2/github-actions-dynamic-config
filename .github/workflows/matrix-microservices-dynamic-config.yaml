@@ -1,0 +1,23 @@
+name: Matrix Microservices Dynamic Config
+
+on:
+  workflow_dispatch
+
+jobs:
+  example_matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service-name: ['service-a', 'service-b', 'service-c']
+    env:
+      DB_INSTANCES_JSON: |
+        {
+          "service-a": "db-a:1111",
+          "service-b": "db-b:2222",
+          "service-c": "db-c:3333"
+        }
+    steps:
+      - name: migration
+        env: 
+          DB_INSTANCE: ${{ fromJson(env.DB_INSTANCES_JSON)[matrix.service-name] }}
+        run: echo "run migration --db-instance=$DB_INSTANCE"
