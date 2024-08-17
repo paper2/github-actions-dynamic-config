@@ -13,6 +13,15 @@ jobs:
      UPPERCASE_FALSE: FALSE
      FIRST_LETTER_UPPERCASE_TRUE: True
      FIRST_LETTER_UPPERCASE_FALSE: False
+     JSON_STRING: |
+       {
+          "LOWERCASE_TRUE": "true",
+          "LOWERCASE_FALSE": "false",
+          "UPPERCASE_TRUE": "TRUE",
+          "UPPERCASE_FALSE": "FALSE",
+          "FIRST_LETTER_UPPERCASE_TRUE": "True",
+          "FIRST_LETTER_UPPERCASE_FALSE": "False"
+       }
     steps:
       # fromJSON
       - name: LOWERCASE_TRUE to Boolean by fromJSON
@@ -51,4 +60,23 @@ jobs:
         run: echo "FIRST_LETTER_UPPERCASE_TRUE is true"
       - name: FIRST_LETTER_UPPERCASE_FALSE to Boolean by startWith
         if: ${{ startsWith(env.FIRST_LETTER_UPPERCASE_FALSE, 'true') }}
+        run: echo "FIRST_LETTER_UPPERCASE_FALSE is true"
+      # fromJSON with JSON string
+      - name: LOWERCASE_TRUE to Boolean by fromJSON with JSON string
+        if: ${{ fromJSON(env.JSON_STRING).LOWERCASE_TRUE }}
+        run: echo "LOWERCASE_TRUE is true"
+      - name: LOWERCASE_FALSE to Boolean by fromJSON with JSON string   
+        if: ${{ fromJSON(env.JSON_STRING).LOWERCASE_FALSE }}
+        run: echo "LOWERCASE_FALSE is true"   
+      - name: UPPERCASE_TRUE to Boolean by fromJSON with JSON string
+        if: ${{ fromJSON(env.JSON_STRING).UPPERCASE_TRUE }}
+        run: echo "UPPERCASE_TRUE is true"
+      - name: UPPERCASE_FALSE to Boolean by fromJSON with JSON string
+        if: ${{ fromJSON(env.JSON_STRING).UPPERCASE_FALSE }}
+        run: echo "UPPERCASE_FALSE is true"
+      - name: FIRST_LETTER_UPPERCASE_TRUE to Boolean by fromJSON with JSON string
+        if: ${{ fromJSON(env.JSON_STRING).FIRST_LETTER_UPPERCASE_TRUE }}
+        run: echo "FIRST_LETTER_UPPERCASE_TRUE is true"
+      - name: FIRST_LETTER_UPPERCASE_FALSE to Boolean by fromJSON with JSON string
+        if: ${{ fromJSON(env.JSON_STRING).FIRST_LETTER_UPPERCASE_FALSE }}
         run: echo "FIRST_LETTER_UPPERCASE_FALSE is true"
