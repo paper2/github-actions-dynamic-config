@@ -14,17 +14,17 @@ jobs:
         {
           "service-a": {
             "instance": "db-a:1111",
-            "pre-migration-job": true
+            "pre-migration-job": true,
             "timeout-minutes": 30
           },
           "service-b": {
             "instance": "db-b:2222",
-            "pre-migration-job": false
+            "pre-migration-job": false,
             "timeout-minutes": 10
           },
           "service-c": {
             "instance": "db-c:3333",
-            "pre-migration-job": false
+            "pre-migration-job": false,
             "timeout-minutes": 10
           }
         }
