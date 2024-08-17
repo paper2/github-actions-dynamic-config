@@ -7,12 +7,12 @@ jobs:
   example:
     runs-on: ubuntu-latest
     env:
-     LOWERCASE_TRUE: true
-     LOWERCASE_FALSE: false
-     UPPERCASE_TRUE: TRUE
-     UPPERCASE_FALSE: FALSE
-     FIRST_LETTER_UPPERCASE_TRUE: True
-     FIRST_LETTER_UPPERCASE_FALSE: False
+     LOWERCASE_TRUE: "true"
+     LOWERCASE_FALSE: "false"
+     UPPERCASE_TRUE: "TRUE"
+     UPPERCASE_FALSE: "FALSE"
+     FIRST_LETTER_UPPERCASE_TRUE: "True"
+     FIRST_LETTER_UPPERCASE_FALSE: "False"
      JSON_STRING: |
        {
           "LOWERCASE_TRUE": "true",
