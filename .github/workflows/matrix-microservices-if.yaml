@@ -1,7 +1,7 @@
 name: Matrix Microservices IF
 
 on:
-  workflow_dispatch:
+  workflow_dispatch
 
 jobs:
   example_matrix:
@@ -10,7 +10,14 @@ jobs:
       matrix:
         service-name: ['service-a', 'service-b', 'service-c']
     steps:
-      - name: set up db connection
-        run: echo "connect to service-x instance"
+      - name: set up db connection for service-a
+        if: matrix.service-name == 'service-a'
+        run: echo "connect to service-a instance"
+      - name: set up db connection for service-b
+        if: matrix.service-name == 'service-b'
+        run: echo "connect to service-b instance"
+      - name: set up db connection for service-c
+        if: matrix.service-name == 'service-c'
+        run: echo "connect to service-c instance" 
       - name: migration
         run: echo "run migration"
