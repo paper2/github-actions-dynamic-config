@@ -19,5 +19,5 @@ jobs:
     steps:
       - name: migration
         env: 
-          DB_INSTANCE: ${{ fromJson(env.DB_INSTANCES_JSON)[matrix.service-name] }}
+          DB_INSTANCE: ${{ fromJSON(env.DB_INSTANCES_JSON)[matrix.service-name] }}
         run: echo "run migration --db-instance=$DB_INSTANCE"
